@@ -13,6 +13,7 @@ import csv
 import math
 import numpy as np
 import dlib
+from numpy.lib.twodim_base import eye
 
 Known_distance = 65  # distance from camera to face measured (cm)
 Known_width = 14     # measure your face width (cm)
@@ -75,6 +76,9 @@ if(capVid.isOpened() == False):
     print("Error: the resource is busy or unvailable")
 else:
     print("The video source has been opened correctly")
+
+capVid.set(cv.CAP_PROP_FRAME_WIDTH, 800)
+capVid.set(cv.CAP_PROP_FRAME_HEIGHT, 600)
 
 Distance_level = 0
 
@@ -160,6 +164,7 @@ def face_data(image, CallOut, Distance_level):
         cv.line(image, (x, y+h), (x, y+h-LLV), (GREEN), line_thickness)
         cv.line(image, (x+w, y+h), (x+w, y+h-LLV), (GREEN), line_thickness)
 
+
         # eyes detector (can be use later)
         #img = cv.rectangle(image, (x, y), (x+w, y+h), (GREEN), 1)
         #roi_gray = gray_image[y:y+h, x:x+w]
@@ -167,6 +172,8 @@ def face_data(image, CallOut, Distance_level):
         #eyes = eyes_detector.detectMultiScale(roi_gray)
         #for (ex, ey, ew, eh) in eyes:
             #cv.rectangle(roi_color, (ex, ey), (ex+ew, ey+eh), (PURPLE), 1)
+
+
 
         print ('x :' +str(x), 'y :'+str(y), 'x+w :' +str(x+w), 'y+h :' +str(y+h))
 
@@ -577,6 +584,24 @@ with open('PoseData.csv','a', encoding='utf-8', newline='') as csvfile:
     writer.writerow({'DateStart' : BegTime,'Start_camera' : BegDate, 'pitch' : pitch, 'yaw' : yaw, 'roll' : roll,
     'DateEnd' : DateEnd,'End_camera' : EndTime, 'Temps_actif' : "{0:.2f}".format(Enlapsedtime), 'Temps_actif_format' : deltatime})
 '''
+
+'''
+# creation file csv Distance
+with open('DataWebtrack2.csv','w', encoding='utf-8', newline='') as csvfile:
+    fieldnames = ['BegTime', 'BegDate', 'Distance_AVG', 'ListTime', 'ListPitch','ListYaw', 'ListRoll', 'EndTime', 'DateEnd']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerow({'BegTime' : BegTime,'BegDate' : BegDate, 'Distance_AVG' : Distance_AVG, 'ListTime' : timenow,
+    'ListPitch' : pitch2,'ListYaw' : yaw, 'ListRoll' : roll, 'EndTime' : EndTime, 'DateEnd' : DateEnd})
+'''
+
+# Write line csv
+with open('DataWebtrack2.csv','a', encoding='utf-8', newline='') as csvfile:
+    fieldnames = ['BegTime', 'BegDate', 'Distance_AVG', 'ListTime', 'ListPitch','ListYaw', 'ListRoll', 'EndTime', 'DateEnd']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writerow({'BegTime' : BegTime,'BegDate' : BegDate, 'Distance_AVG' : Distance_AVG, 'ListTime' : timenow,
+    'ListPitch' : pitch2,'ListYaw' : yaw, 'ListRoll' : roll, 'EndTime' : EndTime, 'DateEnd' : DateEnd})
+
 
 '''
 # creation file csv Distance

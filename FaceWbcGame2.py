@@ -55,14 +55,11 @@ if(capVid.isOpened() == False):
 else:
     print("The video source has been opened correctly")
 
-capVid.set(cv.CAP_PROP_FRAME_WIDTH, 800)
-capVid.set(cv.CAP_PROP_FRAME_HEIGHT, 600)
-
 Distance_level = 0
 
 # Create VideoWriter object
 # VideoWriter (const String &filename, int fourcc, double fps, Size frameSize)
-# out = cv.VideoWriter('VideOutput.mp4', cv.VideoWriter_fourcc(*'mp4v'), 30.0, (640, 480))
+out2 = cv.VideoWriter('VideOutput2.mp4', cv.VideoWriter_fourcc(*'mp4v'), 30.0, (640, 480))
 
 # face/eyes detector object
 parser = argparse.ArgumentParser(description='Code Cascade Classifier')
@@ -545,7 +542,7 @@ while True:
     cv.putText(frame,"Esc : stop",(550,460), cv.FONT_HERSHEY_SIMPLEX, 0.5, (RED), 2)
 
     cv.imshow("Output", frame)
-    # out.write(frame)
+    out2.write(frame)
     if cv.waitKey(1) == 27: 
         Distance_AVG=sum(listeDist)/len(listeDist)
         print("moyenne de distance :", "{0:.2f}".format(Distance_AVG))

@@ -66,8 +66,8 @@ def register_user():
     passward_info = password.get()
 
     file=open(username_info, "w")
-    file.write(username_info+"\n")
-    file.write(passward_info)
+    file.write("Username"+ username_info+"\n")
+    file.write("Password"+ passward_info)
     file.close()
 
     username_entry.delete(0, END)
