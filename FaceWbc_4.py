@@ -568,22 +568,6 @@ with open('DistanceData3.csv','a', encoding='utf-8', newline='') as csvfile:
     writer.writerow({'DateStart' : BegTime,'Start_camera' : BegDate, 'Distance_AVG' : "{0:.2f}".format(Distance_AVG), 
     'DateEnd' : DateEnd,'End_camera' : EndTime, 'Temps_actif' : "{0:.2f}".format(Enlapsedtime), 'Temps_actif_format' : deltatime})
 '''
-'''
-# creation file csv Pitch, Roll, Yaw
-with open('NewFile.csv','w', encoding='utf-8', newline='') as csvfile:
-    fieldnames = ['DateStart', 'Start_camera', 'pitch', 'yaw', 'roll', 'DateEnd','End_camera', 'Temps_actif', 'Temps_actif_format']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    writer.writeheader()
-    writer.writerow({'DateStart' : BegTime,'Start_camera' : BegDate, 'pitch' : pitch, 'yaw' : yaw, 'roll' : roll,
-    'DateEnd' : DateEnd,'End_camera' : EndTime, 'Temps_actif' : "{0:.2f}".format(Enlapsedtime), 'Temps_actif_format' : deltatime})
-
-# Write line csv
-with open('PoseData.csv','a', encoding='utf-8', newline='') as csvfile:
-    fieldnames = ['DateStart', 'Start_camera', 'pitch', 'yaw', 'roll', 'DateEnd','End_camera', 'Temps_actif', 'Temps_actif_format']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    writer.writerow({'DateStart' : BegTime,'Start_camera' : BegDate, 'pitch' : pitch, 'yaw' : yaw, 'roll' : roll,
-    'DateEnd' : DateEnd,'End_camera' : EndTime, 'Temps_actif' : "{0:.2f}".format(Enlapsedtime), 'Temps_actif_format' : deltatime})
-'''
 
 '''
 # creation file csv Distance
@@ -593,7 +577,6 @@ with open('DataWebtrack2.csv','w', encoding='utf-8', newline='') as csvfile:
     writer.writeheader()
     writer.writerow({'BegTime' : BegTime,'BegDate' : BegDate, 'Distance_AVG' : Distance_AVG, 'ListTime' : timenow,
     'ListPitch' : pitch2,'ListYaw' : yaw, 'ListRoll' : roll, 'EndTime' : EndTime, 'DateEnd' : DateEnd})
-'''
 
 # Write line csv
 with open('DataWebtrack2.csv','a', encoding='utf-8', newline='') as csvfile:
@@ -601,7 +584,7 @@ with open('DataWebtrack2.csv','a', encoding='utf-8', newline='') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writerow({'BegTime' : BegTime,'BegDate' : BegDate, 'Distance_AVG' : Distance_AVG, 'ListTime' : timenow,
     'ListPitch' : pitch2,'ListYaw' : yaw, 'ListRoll' : roll, 'EndTime' : EndTime, 'DateEnd' : DateEnd})
-
+'''
 
 '''
 # creation file csv Distance

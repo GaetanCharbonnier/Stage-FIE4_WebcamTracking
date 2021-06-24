@@ -171,23 +171,11 @@ def face_data(image, CallOut, Distance_level):
         roi_gray = gray_image[y:(y+h), x:(x+w)]
         roi_color = img[y:(y+h), x:(x+w)]
         # Creating variable eyes
-        eyes = eyes_detector.detectMultiScale(roi_gray)
-       # Creating for loop in order to divide one eye from another 
-        
-        index=0
+        eyes = eyes_detector.detectMultiScale(roi_gray)    
         # Creating for loop in order to divide one eye from another
         for (ex , ey,  ew,  eh) in eyes:
-            if index == 0:
-                eye_1 = (ex, ey, ew, eh)
-            elif index == 1:
-                    eye_2 = (ex, ey, ew, eh)
-
-            # Drawing rectangles around the eyes
-            cv.rectangle(roi_color, (ex,ey) ,(ex+ew, ey+eh), (0,0,255), 3)
-            index = index + 1
-
-            eye_1 = eyes[0]
-            eye_2 = eyes[1]
+            eye_1 = (ex, ey, ew, eh)
+            eye_2 = (ex, ey, ew, eh)
 
             if eye_1[0] < eye_2[0]:
                 left_eye = eye_1
@@ -198,35 +186,11 @@ def face_data(image, CallOut, Distance_level):
 
             # Calculating coordinates of a central points of the rectangles
             left_eye_center = (int(left_eye[0] + (left_eye[2] / 2)), int(left_eye[1] + (left_eye[3] / 2))) 
-            left_eye_x = left_eye_center[0] 
-            left_eye_y = left_eye_center[1]  
-
             right_eye_center = (int(right_eye[0] + (right_eye[2]/2)), int(right_eye[1] + (right_eye[3]/2)))
-            right_eye_x = right_eye_center[0]
-            right_eye_y = right_eye_center[1]
 
             cv.circle(roi_color, left_eye_center, 5, (255, 0, 0) , -1)
             cv.circle(roi_color, right_eye_center, 5, (255, 0, 0) , -1)
-            cv.line(roi_color,right_eye_center, left_eye_center,(0,200,200),3)
-
-            if left_eye_y > right_eye_y:
-                A = (right_eye_x, left_eye_y)
-
-            else:
-                A = (left_eye_x, right_eye_y)
-
-            cv.circle(roi_color, A, 5, (255, 0, 0) , -1)    
-            cv.line(roi_color,right_eye_center, left_eye_center,(0,200,200),3)
-            cv.line(roi_color,left_eye_center, A,(0,200,200),3)
-            cv.line(roi_color,right_eye_center, A,(0,200,200),3)
-
-            delta_x = right_eye_x - left_eye_x
-            delta_y = right_eye_y - left_eye_y
-            angle=np.arctan(delta_y/delta_x)
-            angle = (angle * 180) / np.pi
-
-            print("delta_x :" + str(delta_x), "delta_y :" + str(delta_y), "angle :" + str(angle))
-
+            cv.line(roi_color,right_eye_center, left_eye_center,RED,3)
 
         print ('x :' +str(x), 'y :'+str(y), 'x+w :' +str(x+w), 'y+h :' +str(y+h))
 
